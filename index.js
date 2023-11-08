@@ -8,7 +8,7 @@ connectDB();
 
 app.use(express.json());
 
-app.post('/room', async (req, res) => {
+app.post('/room', async (req, res) => {  //Create Room
   try {
     
 
@@ -20,7 +20,7 @@ app.post('/room', async (req, res) => {
   }
 });
 
-app.put('/customer/:id', async (req, res) => {
+app.put('/customer/:id', async (req, res) => { // Customer Booking a room
     try {
       
       const roomId = req.params.id
@@ -42,7 +42,7 @@ app.put('/customer/:id', async (req, res) => {
     }
   });
 
-  app.get('/Booked', async (req, res) => {
+  app.get('/Booked', async (req, res) => {   // Fetching details of all booked rooms
     try {
       const bookedRooms = await Room.find({ status: "Booked" })
         .populate({
@@ -61,7 +61,7 @@ app.put('/customer/:id', async (req, res) => {
   });
 
 
-  app.get('/Customers',async(req,res)=> {
+  app.get('/Customers',async(req,res)=> { // fetching all details of customers
 
     try{
     const customers = await Customer.find({})
@@ -69,7 +69,7 @@ app.put('/customer/:id', async (req, res) => {
         path: "RoomId",
         select: 'Room_name status CustomerDetails'
     }).select('name start_time end Date')
-    
+
   res.json(customers)
 }catch(error) {
     console.log(error);
